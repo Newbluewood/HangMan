@@ -1,5 +1,8 @@
 import { Vesala } from "./Veshala.js"
 const recA = "METAFORA"
+const recB = "STRUKTURALNO"
+
+
 
 
 const button = document.getElementById("try")
@@ -7,11 +10,16 @@ const buttonAnother = document.querySelector(".another")
 const slicica = document.getElementById("police")
 const div_slicice = document.getElementById("div_slicice")
 const PlaceHolder1 = document.getElementById("container1-child2-g1")
+const PlaceHolder2 = document.getElementById("container1-child2-g2")
 
 const igra1 = new Vesala(recA)
+const igra2 = new Vesala(recB)
 igra1.postavi()
+igra2.postavi()
 const prikaziStanje = igra1.prikaz
-dodajRec(prikaziStanje,PlaceHolder1,1)   
+const prikaziStanje2 = igra2.prikaz  
+dodajRec(prikaziStanje,PlaceHolder1,1)
+dodajRec(prikaziStanje2, PlaceHolder2,2)   
 
 // IVENTI //
 
@@ -46,14 +54,26 @@ document.addEventListener("click",(e)=>{
 
      // Izbor SLOVA //----------------------------------------------------------------------------------------------------------------------------|
     if(eventElement.classList.contains("slva")){
-        const izbranoSlovo = eventElement.innerText
+        button.removeAttribute("disabled")
+         const abv = document.querySelectorAll(".slva")
+         abv.forEach((el)=>{el.classList.remove("checked")})
+        eventElement.classList.add("checked")
+        let izbranoSlovo = eventElement.innerText
+        button.innerText = "Try " + izbranoSlovo
         button.onclick = ()=>{
             eventElement.setAttribute("disabled", "on")
             igra1.imaLiSlovo(izbranoSlovo)
+            igra2.imaLiSlovo(izbranoSlovo)
             console.log(izbranoSlovo)
             dodajRec(prikaziStanje,PlaceHolder1,1)
+            dodajRec(prikaziStanje2,PlaceHolder2,2)
             const promasaji = igra1.promaseno
+            const promasaji2 = igra2.promaseno
             const ostaloZivota = 10 - igra1.promaseno
+            izbranoSlovo = " "
+            button.innerText = "Try "
+            button.setAttribute("disabled", "on")
+            //
             if(promasaji > 0){
                 const zivot = document.querySelector("#container1-child1-g2-g1-g"+ promasaji)
                 zivot.classList.remove("ziv")
@@ -80,6 +100,10 @@ document.addEventListener("click",(e)=>{
             const zivoti = document.querySelector("#zivotiSpan")
             zivoti.innerText = ostaloZivota
      
+            eventElement.classList.remove("checked")
+            if(igra1.reseno()){
+                document.querySelector(".confety").style.display = "block"
+            }
         }
    
     }
@@ -89,11 +113,6 @@ document.addEventListener("click",(e)=>{
 // kraj IVENTI //
 
 
-const PlaceHolder2 = document.getElementById("container1-child2-g2")
-const rec2 = "STRUKTURALNO"
-
-
-dodajRec(rec2,PlaceHolder2,2)
 
  function dodajRec(rec, PlaceHolderToAdd, br){
     let no = br

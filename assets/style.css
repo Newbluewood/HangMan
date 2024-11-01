@@ -239,6 +239,19 @@ background-color: rgb(87, 160, 87);
     font-weight: 600;
     font-size: 1.6rem;
 }
+.slva {
+    background-color: rgb(184, 185, 185);
+}
+.slva.checked, .slva:hover{
+    background-color: lightskyblue;
+}
+[disabled],[disabled]:hover{
+    background-color: rgb(252, 252, 252);
+    outline: none;
+}
+[disabled]:active{
+    background-color: rgb(255, 121, 121);
+}
 .police{
     height: 100%;
     width: fit-content;

@@ -1,6 +1,7 @@
  export class Vesala {
     constructor(rec){
         this.rec =rec
+        this.duzina = this.rec.length
         this.pogodjeno = 0
         this.promaseno = 0
         this.prikaz = []
@@ -46,7 +47,11 @@
         return this.izbor
     }
     reseno(){
-  
+        if(this.duzina === this.pogodjeno){
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -56,11 +61,16 @@ const igra1 = new Vesala(rec)
 igra1.postavi()
 
 
+const duzina = igra1.duzina
 const odgovor = igra1.imaLiSlovo('A')
 const odgovor1 = igra1.imaLiSlovo('B')
 const odgovor2 = igra1.imaLiSlovo('Z')
 const odgovor3 = igra1.imaLiSlovo('E')
+igra1.imaLiSlovo('R')
+igra1.imaLiSlovo('O')
+//igra1.imaLiSlovo('G')
+
+let kraj = igra1.reseno()
 
 
-
-console.log("imaLiSlovo('A')",odgovor,"imaLiSlovo('B')",odgovor1,"imaLiSlovo('Z')",odgovor2,"imaLiSlovo('E')",odgovor3, ".prikaz:", igra1.prikaz,".pogodjeno:", igra1.pogodjeno,".promaseno: ",igra1.promaseno )
+console.log("imaLiSlovo('A')",odgovor,"imaLiSlovo('B')",odgovor1,"imaLiSlovo('Z')",odgovor2,"imaLiSlovo('E')",odgovor3, ".prikaz:", igra1.prikaz,".pogodjeno:", igra1.pogodjeno,"od:", duzina,".promaseno: ",igra1.promaseno, "kraj:", kraj )
